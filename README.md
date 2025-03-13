@@ -6,7 +6,7 @@ This project is a URL Shortener service that allows users to shorten long URLs i
 ---
 
 ## Development Considerations
-- **Analysys:**
+- **Analysis:**
   - Analyzing the requirements with CEO
   - Discussing the trade-offs between different approaches and scope of the system
   - Designning the system architecture
