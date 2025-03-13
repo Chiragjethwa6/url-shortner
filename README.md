@@ -45,6 +45,10 @@ This project is a URL Shortener service that allows users to shorten long URLs i
    ```sh
    npm start
    ```
+5. To test the application:
+  ```sh
+  npm test
+  ```
 
 ### API Endpoints
 
