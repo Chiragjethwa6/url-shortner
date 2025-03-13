@@ -88,6 +88,8 @@ This project is a URL Shortener service that allows users to shorten long URLs i
 
 ### Future Enhancements
 - **Validations:** To validate the URL and parameters
+- **Comments:** Adding comments for Readability and Complex Logic
+- **Constants File:** For configuring the messages sent in responses
 - **Custom Short Links:** Allow users to specify custom short codes.
 - **Rate Limiting:** To prevent abuse using rate-limiting middleware.
 - **User Authentication:** Implement user accounts to track shortened URLs.
