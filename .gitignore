@@ -1,0 +1,5 @@
+# env files
+.env*
+package-lock.json
+node_modules
+coverage
