@@ -21,6 +21,8 @@ jobs:
           EC2_USER: ${{ secrets.EC2_USER }}
           EC2_KEY: ${{ secrets.EC2_KEY }}
           MONGO_URI: ${{ secrets.MONGO_URI }}
+          PORT: ${{ secrets.PORT }}
+          BASE_URL: ${{ secrets.BASE_URL }}
         run: |
           echo "$EC2_KEY" > ec2_key.pem
           chmod 400 ec2_key.pem
