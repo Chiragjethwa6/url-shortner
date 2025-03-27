@@ -1,0 +1,31 @@
+name: Deploy to AWS EC2
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      - name: Install SSH Client
+        run: sudo apt-get install -y openssh-client
+      
+      - name: Deploy to EC2
+        env: 
+          EC2_HOST: ${{ secretes.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_KEY: ${{ secrets.EC2_KEY }}
+        run: |
+          echo "$EC2_KEY" > ec2_key.pem
+          chmod 400 ec2_key.pem
+          ssh -o StrictHostKeyChecing=no -i ec2_key.pem $EC2_USER@EC2_HOST "
+            cd /home/ubuntu/url-shortner || git clone https://github.com/Chiragjethwa6/url-shortner.git && cd url-shortner;
+            git pull origin main;
+            npm install;
+            pm2 restart server.js || pm2 start server.js --name url-shortner;
+          "
