@@ -14,7 +14,7 @@ jobs:
       
       - name: Install SSH Client
         run: sudo apt-get install -y openssh-client
-      
+
       - name: Deploy to EC2
         env: 
           EC2_HOST: ${{ secrets.EC2_HOST }}
@@ -24,17 +24,18 @@ jobs:
           PORT: ${{ secrets.PORT }}
           BASE_URL: ${{ secrets.BASE_URL }}
         run: |
+          echo "MONGO_URI: $MONGO_URI"
+          echo "PORT: $PORT"
+          echo "BASE_URL: $BASE_URL"
           echo "$EC2_KEY" > ec2_key.pem
           chmod 400 ec2_key.pem
           ssh -o StrictHostKeyChecking=no -i ec2_key.pem $EC2_USER@$EC2_HOST << 'EOF'
+          export MONGO_URI=$MONGO_URI
+          export PORT=$PORT
+          export BASE_URL=$BASE_URL
           cd /home/ubuntu/url-shortner/src || { git clone https://github.com/Chiragjethwa6/url-shortner.git /home/ubuntu/url-shortner/src && cd /home/ubuntu/url-shortner/src; }
           git pull origin main
           npm install
           pm2 restart server.js || pm2 start server.js --name url-shortner
           EOF
           rm -f ec2_key.pem
-      - name: Debug Environment Variables
-        run: |
-          echo "MONGO_URI: $MONGO_URI"
-          echo "PORT: $PORT"
-          echo "BASE_URL: $BASE_URL"
