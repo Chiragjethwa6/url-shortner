@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 // Accessing environment variables
 const mongoURI = process.env.MONGO_URI;
 const port = process.env.PORT;
