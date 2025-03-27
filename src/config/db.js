@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
+
+// Accessing environment variables
+const mongoURI = process.env.MONGO_URI;
+const port = process.env.PORT;
+const baseUrl = process.env.BASE_URL;
+
+console.log("Connecting to MongoDB with URI: ", mongoURI);
+console.log("Application running on port: ", port);
+console.log("Base URL: ", baseUrl);
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
+    const conn = await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -15,7 +23,7 @@ const connectDB = async () => {
 };
 
 const disconnectDB = async () => {
-    await mongoose.disconnect();
+  await mongoose.disconnect();
 };
 
 module.exports = { connectDB, disconnectDB };
