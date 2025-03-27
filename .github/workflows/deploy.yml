@@ -33,3 +33,8 @@ jobs:
           pm2 restart server.js || pm2 start server.js --name url-shortner
           EOF
           rm -f ec2_key.pem
+      - name: Debug Environment Variables
+        run: |
+          echo "MONGO_URI: $MONGO_URI"
+          echo "PORT: $PORT"
+          echo "BASE_URL: $BASE_URL"
