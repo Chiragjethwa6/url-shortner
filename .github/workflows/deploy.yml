@@ -24,7 +24,7 @@ jobs:
           echo "$EC2_KEY" > ec2_key.pem
           chmod 400 ec2_key.pem
           ssh -o StrictHostKeyChecking=no -i ec2_key.pem $EC2_USER@$EC2_HOST << 'EOF'
-          cd /home/ubuntu/url-shortner || { git clone https://github.com/Chiragjethwa6/url-shortner.git /home/ubuntu/url-shortner && cd /home/ubuntu/url-shortner; }
+          cd /home/ubuntu/url-shortner/src || { git clone https://github.com/Chiragjethwa6/url-shortner.git /home/ubuntu/url-shortner/src && cd /home/ubuntu/url-shortner/src; }
           git pull origin main
           npm install
           pm2 restart server.js || pm2 start server.js --name url-shortner
